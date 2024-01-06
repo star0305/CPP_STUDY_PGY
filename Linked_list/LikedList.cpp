@@ -1,156 +1,33 @@
 #include <iostream>
-
 using namespace std;
-
-//node class (data&nextNode°¡ Á¸Àç)
-class LinkedList_Node {
-public:
-	int data;
-	LinkedList_Node* nextNode;
-};
-
-//LinkedList class »ý¼º
-class LinkedList {
-private:
-	LinkedList_Node* head;
-	LinkedList_Node* tail;
-
-public:
-	LinkedList() {
-		//head¿Í tailÀÇ Æ÷ÀÎÅÍ ÃÊ±âÈ­
-		head = NULL;
-		tail = NULL;
-	}
-
-	//Ã¹ ¹øÂ°¿¡ node Ãß°¡
-	void addFrontNode(int x) {
-		LinkedList_Node* temp = new LinkedList_Node;
-		//tempÀÇ µ¥ÀÌÅÍ´Â x
-		temp->data = x;
-
-		//LinkedList°¡ ºñ¾îÀÖÀ» °æ¿ì
-		if (head == NULL && tail == NULL) {
-			// Ã¹ node´Â temp
-			head = temp;
-			//¸¶Áö¸· node´Â temp
-			tail = temp;
-		}
-		//LinkedList¿¡ µ¥ÀÌÅÍ°¡ ÀÖÀ» °æ¿ì
-		else {
-			temp->nextNode = head;
-			//head´Â temp 
-			head = temp;
-		}
-	}
-
-	//¸¶Áö¸·¿¡ node Ãß°¡
-	void addNode(int x) {
-		LinkedList_Node* temp = new LinkedList_Node;
-
-		//tempÀÇ µ¥ÀÌÅÍ´Â x
-		temp->data = x;
-		//tempÀÇ nextNode = NULL°ª
-		temp->nextNode = NULL;
-
-		//LinkedList °¡ ºñ¾î ÀÖ´Â °æ¿ì
-		if (head == NULL && tail == NULL) {
-			//Ã¹ node´Â temp
-			head = temp;
-			//¸¶Áö¸· node´Â temp
-			tail = temp;
-		}
-		//LinkedList¿¡ µ¥ÀÌÅÍ°¡ ÀÖ´Â °æ¿ì
-		else {
-			//ÇöÀç ¸¶Áö¸·nodeÀÇ nextNode´Â temp
-			tail->nextNode = temp;
-			//¸¶Áö¸· node´Â temp
-			tail = temp;
-		}
-	}
-
-	//node »ðÀÔ
-	void insertNode(LinkedList_Node* prevNode, int x) {
-		LinkedList_Node* temp = new LinkedList_Node;
-		//tempÀÇ µ¥ÀÌ¾î´Â x
-		temp->data = x;
-
-		//tempÀÇ nextNodeÀúÀå
-		//(»ðÀÔ ÇÒ ÀÌÀü nodeÀÇ nextNode¸¦ tmepÀÇ nextNode¿¡ ÀúÀå)
-		temp->nextNode = prevNode->nextNode;
-
-		//temp »ðÀÔ
-		//temp ÀÌÀü nodeÀÇ nextNode¸¦ temp·Î ÀúÀå
-		prevNode->nextNode = temp;
-	}
-
-	//node »èÁ¦
-	void deleteNode(LinkedList_Node* prevNode) {
-		// »èÁ¦ÇÒ node¸¦ temp¿¡ ÀúÀå
-		// (»èÁ¦ÇÒ nodeÀÇ ÀÌÀü nodeÀÇ nextNode)
-		LinkedList_Node* temp = prevNode->nextNode;
-
-		//»èÁ¦ÇÒ node¸¦ Á¦¿Ü 
-		//(»èÁ¦ÇÒ nodeÀÇ nextNode¸¦ ÀÌÀü nodeÀÇ nextNode¿¡ ÀúÀå)
-		prevNode->nextNode = temp->nextNode;
-
-		//temp »èÁ¦
-		delete temp;
-	}
-
-	//Ã¹ ¹øÂ° ³ëµå °¡Á®¿À±â
-	LinkedList_Node* getHead() {
-		return head;
-	}
-	//LinkedList Ãâ·Â
-	void printLinkedList(LinkedList_Node* head) {
-		if (head == NULL) {
-			cout << "\n";
-		}
-		else {
-			cout << head->data << " ";
-			printLinkedList(head->nextNode);
-		}
-		cout << endl;
-	}
-};
-
-
-
-
-
-
-
-
-
-
-//¸ÞÀÎ ÇÔ¼ö
+//ë©”ì¸ í•¨ìˆ˜
 int main() {
 	LinkedList ex;
 
-	//0Ãß°¡
+	//0ì¶”ê°€
 	ex.addNode(0);
-	//1Ãß°¡
+	//1ì¶”ê°€
 	ex.addNode(1);
-	//2Ãß°¡
+	//2ì¶”ê°€
 	ex.addNode(2);
 
 	//printLinkedList
-	cout << "0,1,2¸¦ LinkedList¿¡ Ãß°¡ \n";
+	cout << "0,1,2ë¥¼ LinkedListì— ì¶”ê°€ \n";
 	ex.printLinkedList(ex.getHead());
 
-	//-1À» Á¦ÀÏ ¾Õ¿¡ Ãß°¡
+	//-1ì„ ì œì¼ ì•žì— ì¶”ê°€
 	ex.addFrontNode(-1);
 
-	//3À» ³×¹øÂ°¿¡ Ãß°¡
+	//3ì„ ë„¤ë²ˆì§¸ì— ì¶”ê°€
 	ex.insertNode(ex.getHead()->nextNode->nextNode, 3);
-	cout << "-1À» Ã¹¹øÂ°¿¡ Ãß°¡, 3À» ³×¹øÂ°¿¡ Ãß°¡\n";
+	cout << "-1ì„ ì²«ë²ˆì§¸ì— ì¶”ê°€, 3ì„ ë„¤ë²ˆì§¸ì— ì¶”ê°€\n";
 	ex.printLinkedList(ex.getHead());
 
-	//¼¼¹øÂ° ³ëµå »èÁ¦ 
+	//ì„¸ë²ˆì§¸ ë…¸ë“œ ì‚­ì œ 
 	ex.deleteNode(ex.getHead()->nextNode);
 
 	//printLinkedList
-	cout << "¼¼¹ø Â° ³ëµå¸¦ »èÁ¦\n";
+	cout << "ì„¸ë²ˆ ì§¸ ë…¸ë“œë¥¼ ì‚­ì œ\n";
 	ex.printLinkedList(ex.getHead());
 
 
