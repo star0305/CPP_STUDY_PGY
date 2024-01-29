@@ -3,7 +3,7 @@ Hello! This is How I study about the C++. I want to use this skill(Programming/C
 <content>
 1) Linked List
 2) Binary tree
-3) TBD
+3) DoubleLikedList_QuickSort
 4) TBD
 
  <p.s>
